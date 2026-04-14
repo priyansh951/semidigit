@@ -34,13 +34,17 @@ export default function LeadFormModal({ isOpen, onClose, initialProduct }: LeadF
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
     
-    const leads = JSON.parse(localStorage.getItem('semidigit_leads') || '[]');
-    leads.push({
-      ...formData,
-      id: Math.random().toString(36).substr(2, 9),
-      timestamp: new Date().toISOString()
-    });
-    localStorage.setItem('semidigit_leads', JSON.stringify(leads));
+    try {
+      const leads = JSON.parse(localStorage.getItem('semidigit_leads') || '[]');
+      leads.push({
+        ...formData,
+        id: Math.random().toString(36).substr(2, 9),
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem('semidigit_leads', JSON.stringify(leads));
+    } catch (e) {
+      console.error('Failed to save lead to localStorage:', e);
+    }
     
     setIsSubmitting(false);
     setIsSuccess(true);

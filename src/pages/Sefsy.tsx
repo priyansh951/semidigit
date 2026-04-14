@@ -102,7 +102,7 @@ export default function Sefsy() {
             <div className="absolute inset-0 bg-accent/10 blur-[100px] rounded-full animate-pulse" />
             <div className="relative z-10 p-8 md:p-12">
               <img 
-                src="/sefsynew.jpg" 
+              src={`${import.meta.env.BASE_URL}sefsynew.jpg`} 
                 alt="SEFSY" 
                 className="w-full h-auto drop-shadow-[0_0_80px_rgba(200,255,0,0.15)] rounded-2xl border border-border-light bg-surface/30 backdrop-blur-sm"
                 referrerPolicy="no-referrer"

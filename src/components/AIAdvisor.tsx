@@ -5,7 +5,13 @@ import { PRODUCTS } from '../constants';
 import { Sparkles, Send, Bot, User, Loader2, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const getAI = () => {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey || apiKey === "undefined") {
+    return null;
+  }
+  return new GoogleGenAI({ apiKey });
+};
 
 export default function AIAdvisor() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +38,12 @@ export default function AIAdvisor() {
     setIsLoading(true);
 
     try {
+      const ai = getAI();
+      if (!ai) {
+        setMessages(prev => [...prev, { role: 'ai', content: "The AI Advisor is currently unavailable because the Gemini API key is not configured. Please contact the administrator." }]);
+        setIsLoading(false);
+        return;
+      }
       const productContext = PRODUCTS.map(p => `- ${p.name}: ${p.description} (Category: ${p.category})`).join('\n');
       
       const response = await ai.models.generateContent({

@@ -20,8 +20,8 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <LeadProvider>
-      <Router>
+    <Router>
+      <LeadProvider>
         <ScrollToTop />
         <div className="min-h-screen flex flex-col">
           <Navbar />
@@ -36,8 +36,8 @@ export default function App() {
           </div>
           <Footer />
         </div>
-      </Router>
-    </LeadProvider>
+      </LeadProvider>
+    </Router>
   );
 }
 
