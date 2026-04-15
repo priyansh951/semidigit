@@ -61,7 +61,7 @@ export default function SefsySpotlight() {
               {/* Placeholder for Product Image */}
               <div className="aspect-square rounded-lg bg-surface-2 border border-border-light flex items-center justify-center overflow-hidden group">
                 <img 
-                  src="sefsynew.jpg"
+                  src="https://images.unsplash.com/photo-1544233726-9f1d2b27be8b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="SEFSY Smart Cooker" 
                   className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
