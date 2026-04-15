@@ -95,7 +95,7 @@ export default function Hero() {
             <div className="aspect-square rounded-2xl border border-border-light bg-surface/50 backdrop-blur-xl p-8 relative overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <img 
-                src="landingPic.jpg"
+                src="https://images.unsplash.com/photo-1625571705670-38fc39c923ba?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="IoT Hardware" 
                 className="w-full h-full object-cover rounded-lg opacity-80 group-hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"
