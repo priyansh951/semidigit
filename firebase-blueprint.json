@@ -1,0 +1,25 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "A lead inquiry from the website",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Full name of the inquirer" },
+        "email": { "type": "string", "format": "email", "description": "Email address" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "company": { "type": "string", "description": "Company name (optional)" },
+        "product": { "type": "string", "description": "Product they are interested in" },
+        "message": { "type": "string", "description": "Inquiry message" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "When the lead was submitted" }
+      },
+      "required": ["name", "email", "phone", "product", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Collection of lead inquiries"
+    }
+  }
+}

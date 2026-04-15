@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { PRODUCTS } from '../constants';
-import { Category } from '../types';
+import { Category } from './types';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, Filter, ArrowRight } from 'lucide-react';
 import { cn } from '../lib/utils';

@@ -2,6 +2,45 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CheckCircle2, Loader2 } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { db } from '../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+
+enum OperationType {
+  CREATE = 'create',
+  UPDATE = 'update',
+  DELETE = 'delete',
+  LIST = 'list',
+  GET = 'get',
+  WRITE = 'write',
+}
+
+interface FirestoreErrorInfo {
+  error: string;
+  operationType: OperationType;
+  path: string | null;
+  authInfo: {
+    userId: string | undefined;
+    email: string | null | undefined;
+    emailVerified: boolean | undefined;
+    isAnonymous: boolean | undefined;
+  }
+}
+
+function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null) {
+  const errInfo: FirestoreErrorInfo = {
+    error: error instanceof Error ? error.message : String(error),
+    authInfo: {
+      userId: undefined, // We don't have auth instance here easily without importing, but leads are public write
+      email: undefined,
+      emailVerified: undefined,
+      isAnonymous: undefined,
+    },
+    operationType,
+    path
+  }
+  console.error('Firestore Error: ', JSON.stringify(errInfo));
+  throw new Error(JSON.stringify(errInfo));
+}
 
 interface LeadFormModalProps {
   isOpen: boolean;
@@ -31,19 +70,14 @@ export default function LeadFormModal({ isOpen, onClose, initialProduct }: LeadF
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
     try {
-      const leads = JSON.parse(localStorage.getItem('semidigit_leads') || '[]');
-      leads.push({
+      const path = 'leads';
+      await addDoc(collection(db, path), {
         ...formData,
-        id: Math.random().toString(36).substr(2, 9),
-        timestamp: new Date().toISOString()
+        timestamp: serverTimestamp()
       });
-      localStorage.setItem('semidigit_leads', JSON.stringify(leads));
-    } catch (e) {
-      console.error('Failed to save lead to localStorage:', e);
+    } catch (error) {
+      handleFirestoreError(error, OperationType.WRITE, 'leads');
     }
     
     setIsSubmitting(false);

@@ -6,6 +6,7 @@ import Products from './pages/Products';
 import Solutions from './pages/Solutions';
 import Sefsy from './pages/Sefsy';
 import Contact from './pages/Contact';
+import Admin from './pages/Admin';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { LeadProvider } from './LeadContext';
@@ -32,6 +33,7 @@ export default function App() {
               <Route path="/solutions" element={<Solutions />} />
               <Route path="/sefsy" element={<Sefsy />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/admin" element={<Admin />} />
             </Routes>
           </div>
           <Footer />
