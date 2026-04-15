@@ -21,8 +21,25 @@ export default function Admin() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const adminEmail = "priyansh2k03@gmail.com";
+
+  const handleSignIn = async () => {
+    setError(null);
+    try {
+      await signInWithGoogle();
+    } catch (err: any) {
+      console.error("Sign in error:", err);
+      if (err.code === 'auth/popup-blocked') {
+        setError("Popup blocked! Please allow popups for this site in your browser settings.");
+      } else if (err.code === 'auth/unauthorized-domain') {
+        setError("This domain is not authorized in Firebase. Please add 'semidigit.vercel.app' to Authorized Domains in Firebase Console.");
+      } else {
+        setError(err.message || "An unknown error occurred during sign in.");
+      }
+    }
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (u) => {
@@ -77,8 +94,15 @@ export default function Admin() {
         <div className="max-w-md w-full text-center">
           <h1 className="text-4xl font-black tracking-tighter mb-6">ADMIN ACCESS</h1>
           <p className="text-text-secondary mb-8">Please sign in with your admin account to view inquiries.</p>
+          
+          {error && (
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/50 rounded text-red-500 text-sm font-medium">
+              {error}
+            </div>
+          )}
+
           <button
-            onClick={signInWithGoogle}
+            onClick={handleSignIn}
             className="w-full bg-accent text-background py-4 rounded-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all"
           >
             <LogIn className="w-5 h-5" />
