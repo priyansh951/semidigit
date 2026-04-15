@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Zap, Heart, Smartphone } from 'lucide-react';
-import sefsynew from '../assets/sefsynew.jpg';
 
 export default function SefsySpotlight() {
   return (
@@ -62,7 +61,7 @@ export default function SefsySpotlight() {
               {/* Placeholder for Product Image */}
               <div className="aspect-square rounded-lg bg-surface-2 border border-border-light flex items-center justify-center overflow-hidden group">
                 <img 
-                  src={sefsynew} 
+                  src="sefsynew.jpg"
                   alt="SEFSY Smart Cooker" 
                   className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"

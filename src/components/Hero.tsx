@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLeadModal } from '../LeadContext';
-import landingPic from '../assets/landingPic.jpg';
+
 
 export default function Hero() {
   const { openModal } = useLeadModal();
